@@ -1,0 +1,41 @@
+//a
+
+function onNoteHit(event) {
+    var note = event.note;
+    if (note.isSustainNote) return;
+    trace(note.extra);
+
+    if (note.extra.exists("again")) again(event);
+
+    if (note.extra.exists("rebound")) rebound(event);
+
+    if (note.extra.exists("boo")) {
+        FlxTween.tween(note, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut});
+        return;
+    }
+}
+
+function again(event) {
+    var note = event.note;
+    var again = Std.parseInt(note.extra.get("again"));
+    if (again <= 0) return;
+
+    note.extra.set("again", again - 1);
+    event.preventDeletion();
+    note.wasGoodHit = false;
+    note.strumTime += 1000;
+
+}
+
+function rebound(event) {
+    var note = event.note;
+    // taking code from smth I worked on. CREDIT ITSLJCOOL PLEASE!!
+    var rebound_amount = Std.parseInt(note.extra.get("rebound"));
+    if (rebound_amount <= 0) return;
+
+    note.extra.set("rebound", rebound_amount - 1);
+    event.preventDeletion();
+    note.wasGoodHit = false;
+    note.strumTime += 15; // add a little extra time to the strum time so it doesn't hit the note immediately. Because it takes time to rebound.
+    FlxTween.tween(note, {strumTime: (note.strumTime + Conductor.crochet * 2) - 15}, 0.45, {ease: FlxEase.quadOut});
+}
