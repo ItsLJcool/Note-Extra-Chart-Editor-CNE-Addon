@@ -11,7 +11,7 @@ I used it to allow my Custom Note Types to have different effects, when I wanted
 You could edit the chart manually to add this, but this makes it easier.
 
 ## Showcase
-![Gif showcasing what it looks like in the chart editor](images/readme/Showcase-low.gif)
+![Gif showcasing what it looks like in the chart editor](images/readme/showcase-low.gif)
 Checkout the [Example.hx](./songs/Example.hx.disabled) to see how to use it.
 
 ## Why it works?
